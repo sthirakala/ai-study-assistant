@@ -1,0 +1,240 @@
+.flashcard-page {
+
+  min-height: calc(100vh - 120px);
+
+  padding: 2rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+}
+
+
+.flashcard-page h1 {
+
+  color: #374151;
+
+  font-size: 2.2rem;
+
+  margin-bottom: 0.5rem;
+
+}
+
+
+.flashcard-page p {
+
+  color: #6B7280;
+
+  margin-bottom: 2rem;
+
+}
+
+
+
+.flashcard-page button {
+
+  background: #7A9E7E;
+
+  color:white;
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:0.9rem 2rem;
+
+  font-size:1rem;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.2s;
+
+  margin-bottom:2rem;
+
+}
+
+
+.flashcard-page button:hover {
+
+  background:#658568;
+
+}
+
+
+
+.flashcard-section {
+
+  width:90%;
+
+  max-width:850px;
+
+}
+
+
+
+.flashcard {
+
+  width:100%;
+
+  min-height:350px;
+
+  border-radius:24px;
+
+  padding:2rem;
+
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+
+  line-height:1.7;
+
+  background:white;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+}
+
+
+
+.flashcard-front,
+
+.flashcard-back {
+
+  width:100%;
+
+  min-height:300px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+}
+
+
+.flashcard-front h2 {
+
+  color:#374151;
+
+  font-size:1.6rem;
+
+  margin-bottom:2rem;
+
+}
+
+
+
+.flashcard-back {
+
+  background:#F1F6ED;
+
+  border-radius:18px;
+
+  padding:2rem;
+
+}
+
+
+.flashcard-back h2 {
+
+  color:#374151;
+
+  background:#F5F3EE;
+
+  border-radius:14px;
+
+  padding:0.1rem 1rem;
+
+}
+
+
+.flashcard-back p {
+
+  color:#4B5563;
+
+  font-size:1.1rem;
+
+  margin-bottom:1.5rem;
+
+}
+
+
+
+.flashcard-navigation {
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:2rem;
+
+  margin-top:1.5rem;
+
+}
+
+
+
+.flashcard-navigation span {
+
+  color:#6B7280;
+
+  font-size:1rem;
+
+  font-weight:600;
+
+}
+
+
+.flashcard-navigation button {
+
+  background:#7A9E7E;
+
+  color:white;
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:0.7rem 1.5rem;
+
+  font-size:0.95rem;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.2s;
+
+  margin-bottom:0;
+
+}
+
+
+.flashcard-navigation button:hover {
+
+  background:#658568;
+
+}
+
+
+.flashcard-navigation button:disabled {
+
+  background:#D1D5DB;
+
+  cursor:not-allowed;
+
+}
