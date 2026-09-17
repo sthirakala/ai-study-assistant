@@ -1,113 +1,113 @@
 import { useState } from "react";
-import {RiUploadCloudFill} from "react-icons/ri";
+import { RiUploadCloudFill } from "react-icons/ri";
 import "./css/UploadPDF.css";
 
 const UploadPDF = () => {
-    const [file, setFile] = useState(()=>{
-      const savedFile = localStorage.getItem("uploadedFileName");
-      if(savedFile){
-        return {name: savedFile};
-      }
-      return null;
+    const [file, setFile] = useState(null);
+
+    const [fileName, setFileName] = useState(() => {
+        return localStorage.getItem("uploadedFileName");
     });
+
     const [uploading, setUploading] = useState(false);
     const [result, setResult] = useState(null);
-    const handleFileChange = (e) =>{
+
+    const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
-        if(selectedFile){
+
+        if (selectedFile) {
             setFile(selectedFile);
+            setFileName(selectedFile.name);
         }
     };
+
     const handleUpload = async () => {
 
-  if (!file) return;
+        if (!file) return;
 
+        setUploading(true);
 
-  setUploading(true);
+        const formData = new FormData();
 
+        formData.append("file", file);
 
-  const formData = new FormData();
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/upload`,
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
 
-  formData.append("file", file);
+        const data = await response.json();
 
+        setResult(data);
 
-  const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/upload`,
-    {
-      method: "POST",
-      body: formData,
-    }
-  );
+        setFileName(data.filename);
+        localStorage.setItem("uploadedFileName", data.filename);
 
+        setUploading(false);
+    };
 
-  const data = await response.json();
+    return (
+        <div className="upload-box">
 
+            <h2>Upload Study Material</h2>
 
-  setResult(data);
-  localStorage.setItem("uploadedFileName", data.filename);
+            <label className="upload-area">
 
-  setUploading(false);
+                <RiUploadCloudFill className="upload-icon"/>
+
+                <p className="upload-text">
+                    Click to upload your PDF here
+                </p>
+
+                <p className="upload-subtext">
+                    Supports PDF files
+                </p>
+
+                <input
+                    className="file-input"
+                    type="file"
+                    accept=".pdf"
+                    onChange={handleFileChange}
+                />
+
+            </label>
+
+            {fileName && (
+                <div className="file-name">
+                    📄 {fileName}
+                </div>
+            )}
+
+            <button
+                className="upload-button"
+                onClick={handleUpload}
+            >
+                {uploading ? "Processing..." : "Process Document"}
+            </button>
+
+            {result && (
+                <div>
+
+                    <h3>
+                        😊 Successfully Uploaded!
+                    </h3>
+
+                    <p>
+                        📄 {result.filename}
+                    </p>
+
+                    <p>
+                        Total Pages: {result.pages}
+                    </p>
+
+                </div>
+            )}
+
+        </div>
+    );
 };
 
-    return (<div className="upload-box">
-
-  <h2>Upload Study Material</h2>
-
-  <label className="upload-area">
-
-    <RiUploadCloudFill className="upload-icon"/>
-
-    <p className="upload-text">
-      Click to upload your PDF here
-    </p>
-
-    <p className="upload-subtext">
-      Supports PDF files
-    </p>
-
-    <input
-      className="file-input"
-      type="file"
-      accept=".pdf"
-      onChange={handleFileChange}
-    />
-
-  </label>
-
-
-  {file && (
-    <>
-    <div className="file-name">
-      📄 {file.name}
-    </div>
-    
-    </>
-  )}
-  <button
-      className="upload-button"
-      onClick={handleUpload}
-    >
-      {uploading ? "Processing..." : "Process Document"}
-    </button>
-    {result && (
-      <div>
-
-        <h3>
-          😊 Successfully Uploaded!
-        </h3>
-
-        <p>
-          📄 {result.filename}
-        </p>
-
-        <p>
-          Total Pages: {result.pages}
-        </p>
-
-      </div>
-    )}
-
-</div>);
-}
- 
 export default UploadPDF;
