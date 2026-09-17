@@ -3,7 +3,13 @@ import {RiUploadCloudFill} from "react-icons/ri";
 import "./css/UploadPDF.css";
 
 const UploadPDF = () => {
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState(()=>{
+      const savedFile = localStorage.getItem("uploadedFileName");
+      if(savedFile){
+        return {name: savedFile};
+      }
+      return null;
+    });
     const [uploading, setUploading] = useState(false);
     const [result, setResult] = useState(null);
     const handleFileChange = (e) =>{
@@ -38,6 +44,7 @@ const UploadPDF = () => {
 
 
   setResult(data);
+  localStorage.setItem("uploadedFileName", data.filename);
 
   setUploading(false);
 };
