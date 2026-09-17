@@ -26,7 +26,7 @@ const UploadPDF = () => {
 
 
   const response = await fetch(
-    "http://localhost:8000/upload",
+    `${import.meta.env.VITE_API_URL}/upload`,
     {
       method: "POST",
       body: formData,

@@ -19,7 +19,7 @@ const ChatArea = () => {
   try {
 
     const response = await fetch(
-      "http://localhost:8000/ask",
+      `${import.meta.env.VITE_API_URL}/ask`,
       {
         method: "POST",
         headers: {

@@ -10,7 +10,7 @@ const Quizzes = () => {
   const generateQuiz = async()=>{
     setLoading(true);
     try{
-      const res = await fetch("http://localhost:8000/quiz",
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/quiz`,
         {
           method: "POST",
         }
